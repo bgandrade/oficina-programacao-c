@@ -1,0 +1,16 @@
+roteiro.md
+relatorio.md
+
+# Residuos comuns de compilacao e execucao em C
+*.exe
+*.out
+*.app
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.ilk
+*.pdb
