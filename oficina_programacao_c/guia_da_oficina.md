@@ -25,8 +25,8 @@ Este material não foi planejado para cobrir:
 
 ## Estrutura das pastas
 
-- `01_aula_01`: introdução, estrutura do programa, `printf`, `scanf`, variáveis e contas simples
-- `02_aula_02`: operadores relacionais, `if`, `else`, `else if` e repetição opcional com `for`
+- `aula_01`: introdução, estrutura do programa, `printf`, `scanf`, variáveis e contas simples
+- `aula_02`: operadores relacionais, `if`, `else`, `else if` e repetição opcional com `for`
 
 ## Ritmo planejado
 
