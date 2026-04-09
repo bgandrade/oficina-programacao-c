@@ -23,18 +23,10 @@ Este material não foi planejado para cobrir:
 - arquivos
 - alocação dinâmica
 
-## Ordem sugerida de uso
-
-1. Leia este arquivo rapidamente com a turma.
-2. Abra a pasta `01_aula_01` e siga os arquivos em ordem numérica.
-3. Abra a pasta `02_aula_02` e siga os arquivos em ordem numérica.
-4. Use os arquivos de desafio ao final de cada aula.
-
 ## Estrutura das pastas
 
 - `01_aula_01`: introdução, estrutura do programa, `printf`, `scanf`, variáveis e contas simples
 - `02_aula_02`: operadores relacionais, `if`, `else`, `else if` e repetição opcional com `for`
-
 
 ## Ritmo planejado
 
