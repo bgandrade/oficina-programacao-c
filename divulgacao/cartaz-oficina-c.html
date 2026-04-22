@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartaz - Oficina de Programação em C</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    :root {
+      --ink: #111;
+      --paper: #fff;
+      --muted: #4c4c4c;
+      --line: #111;
+      --soft: #efefef;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #d8d8d8;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 16px;
+    }
+
+    .sheet {
+      width: 210mm;
+      height: 297mm;
+      background: var(--paper);
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.22);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .page {
+      height: 100%;
+      padding: 14mm;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 9mm;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 43mm;
+      gap: 10mm;
+      align-items: start;
+      border-bottom: 1.2mm solid var(--line);
+      padding-bottom: 9mm;
+    }
+
+    .eyebrow {
+      font-size: 10pt;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 5mm;
+    }
+
+    h1 {
+      font-size: 43pt;
+      line-height: 0.94;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      margin: 0;
+      max-width: 130mm;
+    }
+
+    .subtitle {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18pt;
+      line-height: 1.22;
+      margin: 7mm 0 0;
+      max-width: 124mm;
+    }
+
+    .mark {
+      width: 43mm;
+      aspect-ratio: 1;
+      display: block;
+      object-fit: contain;
+      filter: grayscale(1) contrast(1.18);
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.03fr 0.97fr;
+      gap: 9mm;
+      align-items: stretch;
+    }
+
+    .intro {
+      border: 0.65mm solid var(--line);
+      padding: 8mm;
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .intro h2,
+    .block h2 {
+      font-size: 18pt;
+      line-height: 1.05;
+      margin: 0 0 5mm;
+      text-transform: uppercase;
+    }
+
+    .intro p {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13.5pt;
+      line-height: 1.42;
+      margin: 0 0 4mm;
+    }
+
+    .callout {
+      margin-top: 8mm;
+      border-top: 0.65mm solid var(--line);
+      padding-top: 6mm;
+      font-size: 17pt;
+      line-height: 1.12;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .side {
+      display: grid;
+      gap: 7mm;
+    }
+
+    .block {
+      background: var(--soft);
+      border: 0.65mm solid var(--line);
+      padding: 7mm;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 4mm;
+    }
+
+    li {
+      display: grid;
+      grid-template-columns: 7mm 1fr;
+      gap: 3mm;
+      font-size: 13.5pt;
+      line-height: 1.25;
+      align-items: start;
+    }
+
+    li::before {
+      content: "";
+      width: 4mm;
+      height: 4mm;
+      margin-top: 1.2mm;
+      background: var(--ink);
+      display: block;
+    }
+
+    .format-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 0.65mm solid var(--line);
+      margin-top: 1mm;
+    }
+
+    .format-grid div {
+      padding: 5mm 4mm;
+      min-height: 24mm;
+    }
+
+    .format-grid div + div {
+      border-left: 0.65mm solid var(--line);
+    }
+
+    .number {
+      display: block;
+      font-size: 34pt;
+      font-weight: 900;
+      line-height: 0.9;
+    }
+
+    .label {
+      display: block;
+      font-size: 10.5pt;
+      font-weight: 800;
+      line-height: 1.12;
+      text-transform: uppercase;
+      margin-top: 2mm;
+    }
+
+    .footer {
+      border-top: 1.2mm solid var(--line);
+      padding-top: 7mm;
+      display: grid;
+      grid-template-columns: 1fr 42mm;
+      gap: 9mm;
+      align-items: end;
+    }
+
+    .info {
+      display: grid;
+      gap: 3.5mm;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 29mm 1fr;
+      gap: 4mm;
+      align-items: end;
+      font-size: 13pt;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .line {
+      border-bottom: 0.45mm solid var(--line);
+      min-height: 7mm;
+    }
+
+    .qr {
+      height: 42mm;
+      border: 0.65mm solid var(--line);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 5mm;
+      font-size: 10pt;
+      font-weight: 800;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    @media print {
+      html,
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .sheet {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet" aria-label="Cartaz A4 da Oficina de Programação em C">
+    <section class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Oficina presencial</p>
+          <h1>Oficina de Programação em C</h1>
+          <p class="subtitle">Primeiros passos para entender como programas são criados.</p>
+        </div>
+
+        <img class="mark" alt="Logo da linguagem C" src="data:image/png;base64,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">
+      </header>
+
+      <section class="content">
+        <article class="intro">
+          <div>
+            <h2>Sobre a oficina</h2>
+            <p>A atividade foi pensada para quem deseja começar a entender como os programas de computador são criados.</p>
+            <p>Durante os encontros, os participantes vão construir pequenos programas na linguagem C, praticando desde a escrita do código até a execução no computador.</p>
+            <p>A proposta é apresentar os conceitos iniciais de forma simples, guiada e prática, usando exemplos próximos do dia a dia.</p>
+          </div>
+          <p class="callout">Não é necessário conhecimento prévio em programação.</p>
+        </article>
+
+        <div class="side">
+          <article class="block">
+            <h2>O que vamos fazer</h2>
+            <ul>
+              <li>Entender o que é um programa e como ele resolve problemas.</li>
+              <li>Criar pequenos códigos passo a passo, com orientação.</li>
+              <li>Usar o computador para preparar, executar e testar os exemplos.</li>
+              <li>Resolver desafios simples inspirados em situações do cotidiano.</li>
+            </ul>
+          </article>
+
+          <article class="block">
+            <h2>Formato</h2>
+            <div class="format-grid" aria-label="Formato da oficina">
+              <div>
+                <span class="number">2</span>
+                <span class="label">aulas presenciais</span>
+              </div>
+              <div>
+                <span class="number">2h</span>
+                <span class="label">de duração cada</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="info">
+          <div class="row"><span>Data</span><span class="line"></span></div>
+          <div class="row"><span>Horário</span><span class="line"></span></div>
+          <div class="row"><span>Local</span><span class="line"></span></div>
+          <div class="row"><span>Inscrições</span><span class="line"></span></div>
+        </div>
+        <div class="qr">Espaço para QR Code ou contato</div>
+      </footer>
+    </section>
+  </main>
+</body>
+</html>
